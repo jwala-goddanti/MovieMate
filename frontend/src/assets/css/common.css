@@ -1,0 +1,124 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: #eea127;
+   background: url('https://www.abc4.com/wp-content/uploads/sites/4/2018/12/movie-popcorn-entertainment_1530120399830_382133_ver1.0_47007319_ver1.0.jpg?w=480&h=270&crop=1.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed; /* Fix the background when scrolling */
+    margin: 0;
+    padding: 0;
+}
+
+.panel-heading {
+    text-align: center;
+    margin-bottom: 5px; /* Decreased margin */
+    font-size: 18px;
+    color: #120000;
+}
+
+#forget {
+    min-width: 50px;
+    margin-left: auto;
+    text-decoration: none;
+    cursor: pointer;
+    color: #d8ba13;
+}
+
+#forget:hover {
+    color: #FFA500;
+}
+
+.form-inline label {
+    padding-left: 5px;
+    margin: 0;
+    cursor: pointer;
+    color: #32CD32;
+}
+
+.btn {
+    margin-top: 5px; /* Decreased margin */
+    border-radius: 10px;
+    background-color: #FF4500;
+    color: white;
+    padding: 5px 15px; /* Adjusted padding */
+    border: none;
+}
+
+.btn:hover {
+    background-color: #FF6347;
+}
+
+.panel {
+    min-height: 150px; /* Decreased panel height */
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    margin-top: 25px; /* Decreased margin */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px; /* Adjusted padding */
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 7.5px; /* Adjusted padding */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #FF4500;
+    color: #FF4500;
+    margin-bottom: 7.5px; /* Decreased margin */
+}
+
+.input-field.error {
+    border: 1px solid red;
+    color: red;
+}
+
+input[type='text'],
+input[type='password'] {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: calc(100% - 15px);
+    padding: 7.5px; /* Adjusted padding */
+    border-radius: 5px;
+}
+
+.fa-eye-slash.btn {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+
+.bordert {
+    border-top: 1px solid #FF4500;
+    position: relative;
+}
+
+.bordert:after {
+    content: "or connect with";
+    position: absolute;
+    top: -7.5px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0 5px; /* Adjusted padding */
+    color: #FFD700;
+}
+
+.bordert a {
+    color: #FF6347;
+}
+
+.bordert a:hover {
+    color: #FFDAB9;
+}
