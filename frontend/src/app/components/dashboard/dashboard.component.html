@@ -1,17 +1,88 @@
-<div class="dashboard">
-    <div class="widget">
-      <h2 class="Panel-heading"><b>Movie Listings</b></h2>
-      <p>View and manage movie listings.</p>
-      <button class="btn">View Movie Listings</button>
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <div class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"><h1><i>MovieMate</i></h1></a>
+  </div>
+
+        
+  <div class="d-flex align-items-center" style="margin:10px;">
+    <div *ngIf="cities.length > 0" class="form-group">
+      <label for="city">Select a City:</label>
+      <select class="form-control" id="city" [(ngModel)]="selectedCity" (change)="onCityChange()" style="height: 38px;">
+        <option value="0" disabled [defaultSelected]="0">Select a city</option>
+        <option *ngFor="let city of cities" [value]="city.cityID">{{ city.cityName }}</option>
+      </select>
     </div>
-    <div class="widget">
-      <h2 class="Panel-heading"><b>Bookings</b></h2>
-      <p>Manage and view ticket bookings.</p>
-      <button class="btn">View Bookings</button>
-    </div>
-    <div class="widget">
-      <h2 class="Panel-heading"><b>Reports</b></h2>
-      <p>Generate and view reports.</p>
-      <button class="btn">Generate Reports</button>
+    
+    <a style="background: rgb(189, 2, 5);
+      color: #fff;
+      border-radius: 4px;
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      height: 38px;" class="nav-link px-3 cursor-pointer" (click)="logout()">Sign out</a>
+  </div>
+</header>
+<div style="background-color:rgba(243, 245, 246, 0.935)">
+<h1 style="font-size: 50px;text-align:center; color:rgb(244, 245, 246); font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; background-color:black;" >Hello {{fullName}}!! Unlock the world of Entertainment...</h1>
+<div class="navbar_movies">
+    <a href="#" class="tab active">Movies</a>
+    <a href="" class="tab">Reviews</a>
+    <a href="" class="tab">Gift Cards</a>
+    <a href="" class="tab">Offers</a>
+  </div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h3 class="h3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">&nbsp;Choose movies of your interest and get started</h3>
+              <div class="btn-toolbar mb-2 mb-md-2">
+
+                                                                                                                                                                &nbsp; &nbsp;
+                                                                                                                                                                                            &nbsp;&nbsp;
+                <div class="form-group">
+                  <label for="lan">Language</label>
+                  <select class="form-control custom-select" id="lan" [(ngModel)]="selectedLanguage" (change)="applyFilterLanguage()">
+                    <option value="Telugu">Telugu</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    <option value="Tamil">Tamil</option>
+                  </select>
+                </div>
+                &nbsp;&nbsp;
+                <div class="form-group">
+                  <label for="ratings">Ratings</label>
+                  <select class="form-control custom-select" id="ratings" [(ngModel)]="selectedRating" (change)="applyFilterRating()">
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+                                                                                                                                          
+                                                                                                                                         
+            
+          <div class="search-bar"><!--[(ngModel)]="searchQuery"-->
+            &nbsp;&nbsp;&nbsp;<input class= "search-input" type="text"  placeholder="Search for movies...">
+            <button class="search-btn"> Search</button><!--(click)="searchMovies()"-->
+            
+          </div>
+          
+  <div class="outer">
+  <div class="movie-list">
+    <div class="movie-card" *ngFor="let movie of movie">
+      <img [src]="movie.posterurl" alt="{{ movie.title }}" class="movie-poster">
+      <div class="movie-info">
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.genre }}</p>
+        <p>{{movie.language}}</p>
+        <p>Rating: {{ movie.rating }}</p>
+        <button (click)="getMovieTheatres(movie.movieID)" routerLink="['/theatres']">Book Ticket</button>
+      </div>
     </div>
   </div>
+</div>   
+</div>
+      
+
+
+

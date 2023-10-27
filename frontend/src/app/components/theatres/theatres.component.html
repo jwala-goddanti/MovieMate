@@ -1,0 +1,24 @@
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <div class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"><h1><i>MovieMate</i></h1></a>
+  </div>
+</header>
+<div class="movie-details-container">
+  <img [src]="selectedposter" alt="Movie Poster" class="movie-poster" />
+  <div class="movie-info">
+    <h2>{{movietitle}}</h2>
+    <p>{{genre}}</p>
+    <p>{{language}}</p>
+    <p>Rating: {{rating}}</p>
+   
+  <div class="theatre-details">
+    <h4>Available in theatres at {{cityname}}</h4>
+    <div *ngFor="let t of theatres" class="theatre-block">
+      <div class="theatre-name">{{ t.theatre.name }}</div>
+      <div class="screen-name">{{ t.screenName }}</div>
+      <div class="Available-seats">Available Seats {{ t.theatre.noofseats }}</div>
+      <div class="Ticket-cost">Ticket Cost {{ t.ticketCost }}</div>
+    </div>
+  </div>
+</div>
+</div>
