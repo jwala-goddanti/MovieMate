@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { TheatreComponent } from './components/theatres/theatres.component';
+import { SeatComponent } from './components/seats/seats.component';
 import { CommonModule } from '@angular/common';
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'contactus',component:ContactUsComponent},
   {path:'theatres/:movieId/:selectedCity',component:TheatreComponent},
+  {path:'seats',component:SeatComponent},
   {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]}
 
 ];
@@ -24,7 +26,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes),CommonModule],
   exports: [RouterModule],
-declarations: [TheatreComponent],
+declarations: [TheatreComponent, SeatComponent],
 
 
 })

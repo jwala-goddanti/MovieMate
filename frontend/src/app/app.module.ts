@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/Home/home.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ContactUsComponent } from './components/contactus/contactus.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ContactUsComponent } from './components/contactus/contactus.component';
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
     multi:true
-  }],
+    
+  },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

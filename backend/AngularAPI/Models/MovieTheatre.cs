@@ -20,5 +20,6 @@ namespace AngularAPI.Models
 
         public Movies Movie { get; set; } 
         public Theatre Theatre { get; set; }
+        public List<Seat> seats { get; set; }
     }
 }

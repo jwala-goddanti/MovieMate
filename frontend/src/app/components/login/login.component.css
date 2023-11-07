@@ -5,3 +5,7 @@ img {
     border-radius: 50%;
     position: relative
 }
+.outer {
+    height: 100vh;
+    background:linear-gradient(to top,#010157 50%, #03038b) no-repeat;
+}

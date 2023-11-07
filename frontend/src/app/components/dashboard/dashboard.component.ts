@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   public theatres: any =[];
   public movieId: number =1;
   public fullName: string = " ";
+  movieFilter: string = '';
 
   constructor(
     private api: ApiService,
@@ -82,19 +83,32 @@ export class DashboardComponent implements OnInit {
 
   applyFilterLanguage() {
      
-      this.movies.filterMoviesByLanguage(this.selectedLanguage).subscribe((filteredMovies: any[]) => {
-        this.movie = filteredMovies;
+      this.movies.filterMoviesByLanguage(this.selectedLanguage).subscribe((movie: any[]) => {
+        this.filteredMovies = movie;
+        this.movie = movie;
       });
     
   }
 
   applyFilterRating(){
     
-    this.movies.filterMoviesByRatings(this.selectedRating).subscribe((filteredMovies: any[]) => {
-      this.movie = filteredMovies;
+    this.movies.filterMoviesByRatings(this.selectedRating).subscribe((movie: any[]) => {
+      this.movie = movie;
+      this.filteredMovies = movie;
     });
     
  
+  }
+
+  searchMovies() {
+    if (this.movieFilter) {
+        this.movie = this.movie.filter((movie: any) =>
+        movie.title.toLowerCase().includes(this.movieFilter.toLowerCase())
+      );
+    } else {
+      this.movie = this.filteredMovies;
+      
+    }
   }
  
   getMovieTheatres(mId: number) {

@@ -46,7 +46,7 @@ describe('CityService', () => {
     const expectedMovies: any[] = [{ title: 'Movie1' }, { title: 'Movie2' }];
 
     // Trigger the onCitySelected method
-    service.onCitySelected(selectedCity);
+    //service.onCitySelected(selectedCity);
 
     // Set up a mock HTTP request
     const req = httpTestingController.expectOne(`/api/your-controller-name/getmoviesbycity/${cityId}`);

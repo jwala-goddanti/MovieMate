@@ -134,8 +134,38 @@ namespace AngularAPI.Controllers
 
             return Ok(movieTheatres);
         }
-    }
 
-    
+        // POST: api/MovieTheatre/AddSeats
+        [HttpPost("AddSeats/{movieTheatreID}")]
+        public async Task<IActionResult> AddSeats(int movieTheatreID, [FromBody] List<Seat> seats)
+        {
+            // Check if the movie theater exists
+            var movieTheatre = await _context.MovieTheatres.Include(mt => mt.seats)
+                .FirstOrDefaultAsync(mt => mt.MovieTheaterID == movieTheatreID);
+
+            if (movieTheatre == null)
+            {
+                return NotFound(); // Return a 404 Not Found response if the movie theater is not found.
+            }
+
+            // Add the seats to the movie theater
+            foreach (var seat in seats)
+            {
+                seat.MovieTheatreID = movieTheatre.MovieTheaterID;
+                movieTheatre.seats.Add(seat);
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync(); // Save changes to the database
+                return Ok(); // Return a 200 OK response if the seats are added successfully.
+            }
+            catch (DbUpdateException)
+            {
+                return BadRequest("Failed to add seats."); // Return a 400 Bad Request response in case of an error.
+            }
+        }
     }
+}
+  
 

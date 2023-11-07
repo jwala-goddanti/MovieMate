@@ -16,6 +16,7 @@ namespace AngularAPI.Context
         public DbSet<City> Cities { get; set; }
         public DbSet<Theatre> Theatres { get; set; }
         public DbSet<MovieTheatre> MovieTheatres { get; set; }
+        public DbSet<Seat> Seats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
@@ -28,6 +29,7 @@ namespace AngularAPI.Context
                 .HasKey(m => m.TheaterID);
             modelbuilder.Entity<MovieTheatre>().HasKey(m => m.MovieTheaterID);
             modelbuilder.Entity<Contactus>().ToTable("contactus");
+            modelbuilder.Entity<Seat>().ToTable("seats");
 
         }
     }

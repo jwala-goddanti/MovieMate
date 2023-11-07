@@ -3,9 +3,21 @@
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"><h1><i>MovieMate</i></h1></a>
   </div>
 </header>
+<br><br>
 <div class="movie-details-container">
-  <img [src]="selectedposter" alt="Movie Poster" class="movie-poster" />
+  <br><br><br>
+  <div class="movie-card">
+    <img [src]="selectedposter" alt={{movietitle}} class="movie-poster">
+  </div>
   <div class="movie-info">
+    <div class="date-buttons">
+      <button *ngFor="let date of next7Dates" class="date-button" [class.clicked]="selectedDate==date" (click)="selectDate(date)">
+        {{ date | date:'d MMM  E' }}
+      </button>
+      </div>
+      <div *ngIf="selectedDate">
+        Selected Date: {{ selectedDate | date:'d MMM yyyy (E)' }}
+      </div>
     <h2>{{movietitle}}</h2>
     <p>{{genre}}</p>
     <p>{{language}}</p>
@@ -17,8 +29,20 @@
       <div class="theatre-name">{{ t.theatre.name }}</div>
       <div class="screen-name">{{ t.screenName }}</div>
       <div class="Available-seats">Available Seats {{ t.theatre.noofseats }}</div>
-      <div class="Ticket-cost">Ticket Cost {{ t.ticketCost }}</div>
+      <div class="Ticket-cost">Ticket Cost {{ t.ticketCost }}</div><br>
+      <div class="show-timings">
+        <button
+          *ngFor="let timing of filteredTimings"
+          class="show-button" [class.clicked]="selectedShow===timing" (click)="selectShow(timing)">
+          {{ timing }}
+        </button>
+        
+      <div *ngIf="selectedShow">
+        Selected Show Time: {{selectedShow}}
+      </div>
     </div>
   </div>
 </div>
+
+<button class="seat-select-btn" routerLink="/seats" > Select Seats</button>
 </div>

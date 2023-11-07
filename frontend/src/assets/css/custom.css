@@ -5,7 +5,7 @@
 
 /*#010157 50%, #03038b*/
 .outer {
-    height: 300vh;
+    height: 100%;
     background:linear-gradient(to top,#010157 50%, #03038b) no-repeat;
 }
 

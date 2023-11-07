@@ -3,13 +3,31 @@
   background-color: #eeececdd; 
 }
 
-
-.movie-poster {
-  max-width: 100%;
-  height: 500px;
-  width: auto;
-  margin: 20px;
+.movie-card {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  border-radius: 10px;
+  overflow: hidden; 
 }
+  
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+  
+/* Styles for the movie poster */
+.movie-poster {
+  width: 100%;
+  height: 500px;
+  max-height: 600px;
+  object-fit: cover;
+}
+
 
 .theatre-details {
   padding: 20px;
@@ -17,7 +35,7 @@
 
 
 .theatre-block {
-  background-color: #007bff; 
+  background-color: #3881f5; 
   color: #fff; 
   border: 1px solid #0056b3; 
   border-radius: 8px;
@@ -46,3 +64,76 @@
   font-weight: bold;
   color: #faf9f9; 
 }
+
+
+.date-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow the buttons to wrap to the next row */
+}
+
+.date-button {
+  width: 80px; /* Adjust the width as needed for square shape */
+  height: 80px; /* Adjust the height to match the width for square shape */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color:rgb(5, 154, 170);
+  color: #faf7f7;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 5px;
+  text-align: center;
+  
+}
+
+.date-button:hover {
+  background-color:rgb(49, 95, 244);
+  color: #fff;
+}
+.date-button.clicked {
+  background-color:rgb(244, 49, 108);
+  color: #fff;
+}
+
+.show-button{
+background-color: #fcfcfe;
+color: #070707;
+font-weight: bold;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+cursor: pointer;
+font-size: 16px;
+margin-left: 10px;
+}
+
+.show-button.clicked {
+  background-color:rgb(50, 50, 50);
+  color: #fff;
+}
+
+.seat-select-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

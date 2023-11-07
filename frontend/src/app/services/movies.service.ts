@@ -32,9 +32,10 @@ export class MovieService {
   filterMoviesByRatings(rating: number) {
     return this.http.get<string[]>(this.MovieApiUrl).pipe(
       map((movies: any[]) => {
-        return movies.filter((movie) => !rating || movie.rating >= rating);
+        return movies.filter((movie) => !rating || movie.rating == rating);
       })
     );
   }
+  
   
 }

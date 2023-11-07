@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movies.service';
 import { CityService } from 'src/app/services/cities.service';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-theatre',
@@ -23,14 +25,75 @@ export class TheatreComponent implements OnInit {
   public rating: number = 1;
   public language: string ='';
   public cityname: string='';
+  next7Dates: Date[] = [];
+  public selectedDate: Date |null = null;
+  public selectedShow: string='';
+  showTimings: string[] = [];
+  filteredTimings: string[] = [];
  
 
 
   constructor(private mtservice: MovieTheatreService, private route: ActivatedRoute, private ms:MovieService,
-    private cityservice: CityService) {
+    private cityservice: CityService, private datePipe: DatePipe, private router:Router) {
+     
+      for (let i = 0; i < 7; i++) {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + i);
+        const formattedDate = this.datePipe.transform(currentDate, 'shortDate');
+        if (formattedDate) {
+          this.next7Dates.push(currentDate);
+        }
+      }
+        
+      this.showTimings = ['10:30 AM', '02:30 PM', '06:30 PM', '09:30 PM'];
+    }
+
+
+  selectDate(date: Date) {
+    this.selectedDate = date;
+    this.filterTimings();
   }
 
-  ngOnInit(): void {
+  filterTimings() {
+    if (!this.selectedDate) {
+      this.filteredTimings = [];
+      return;
+    }
+
+    // Get the current system date
+    const currentSystemDate = new Date();
+    const selectedDate = this.selectedDate as Date;
+
+    if (currentSystemDate.toDateString() === selectedDate.toDateString()) {
+      // Selected date is today, filter show timings
+      const currentSystemTime = new Date();
+      const currentHours = currentSystemTime.getHours();
+      const currentMinutes = currentSystemTime.getMinutes();
+      
+      // Filter show timings to only display those in the future
+      this.filteredTimings = this.showTimings.filter(timing => {
+        const[showtime,ampm] = timing.split(' ');
+        var [showHours, showMinutes] = showtime.split(':').map(Number);
+        if(ampm==='PM') showHours=showHours+12;
+        if (
+          showHours > currentHours ||
+          (showHours === currentHours && showMinutes > currentMinutes)
+        ) {
+          return true; // Show this timing
+        }
+        return false; // Don't show this timing
+      });
+    } else {
+      // Selected date is not today, display all show timings
+      this.filteredTimings = this.showTimings;
+    }
+  }
+  
+  selectShow(show: string) {
+    this.selectedShow = show;
+      }
+
+        ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const movieIdParam = params.get('movieId');
       if (movieIdParam !== null) {
@@ -50,7 +113,8 @@ export class TheatreComponent implements OnInit {
     getTheatreDetails() {
     this.mtservice.getMovieTheatresByMovieAndCity(this.movieId, this.selectedCity).subscribe((theatreDetails: any[]) => {
       this.theatres = theatreDetails;
-                });
+                
+    });
   }
 
   getMovieDetails() {

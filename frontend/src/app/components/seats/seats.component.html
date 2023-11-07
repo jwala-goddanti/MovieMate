@@ -1,0 +1,26 @@
+
+<div class="seats-prompt">
+Seats Selected <span *ngFor="let seat of selectedSeats"> {{seat}}</span>
+<div *ngIf="seatSelected">
+
+  Selected seat: {{seatSelected}}
+</div></div>
+<div class="seat-container">
+    <table class="seat-table">
+    <ng-container *ngFor="let row of seats; let rowIndex = index">
+      <tr *ngIf="rowIndex % 9 === 0">
+        <!-- Start a new row after every 9 seats -->
+      </tr>
+      <td>
+            <button class="seat-box" [class.clicked]="seatSelected==row.seatName || selectedSeats.includes(row.seatName)" (click)="selectSeat(row.seatName)"><div class="seat-box-content">
+              {{ row.seatName }}</div>
+            </button>
+          
+      </td>
+    </ng-container>
+  </table>
+      </div>
+      
+      
+      
+      

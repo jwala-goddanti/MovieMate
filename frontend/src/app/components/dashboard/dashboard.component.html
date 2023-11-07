@@ -62,8 +62,8 @@
                                                                                                                                          
             
           <div class="search-bar"><!--[(ngModel)]="searchQuery"-->
-            &nbsp;&nbsp;&nbsp;<input class= "search-input" type="text"  placeholder="Search for movies...">
-            <button class="search-btn"> Search</button><!--(click)="searchMovies()"-->
+            &nbsp;&nbsp;&nbsp;<input class= "search-input" type="text" [(ngModel)]="movieFilter" name="movieFilter" placeholder="Search for movies..."(input)="searchMovies()">
+            <button class="search-btn"> Search</button>
             
           </div>
           
