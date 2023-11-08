@@ -109,38 +109,15 @@
     background-color: #0056b3;
   }
   
-  .navbar_movies {
-    background-color: #50e9a9db;
-    display: flex;
-    padding: 10px;
-    width: 100%;
-    border-radius: 30px;
-  }
-
-  /* Style for the tab links */
-  .tab {
-    text-decoration: none;
-    color: #0d0d0d;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-  }
-
-  /* Style for the active tab */
-  .tab.active {
-    background-color: #e3e7f0;
-    color: rgb(19, 19, 19);
-  }
-
-  /* Hover effect for the tabs */
-  .tab:hover {
-    background-color: #0e0e0eed;
-    color: rgb(253, 250, 250);
-  }
+       
+                  
+          
   
   
   
+  
+  
+      
   
   
   

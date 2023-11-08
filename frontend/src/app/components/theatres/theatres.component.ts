@@ -30,7 +30,8 @@ export class TheatreComponent implements OnInit {
   public selectedShow: string='';
   showTimings: string[] = [];
   filteredTimings: string[] = [];
- 
+  public selectedTheatre:string='';
+  public selectedShowTimes: { [theatreId: string]: string } = {};
 
 
   constructor(private mtservice: MovieTheatreService, private route: ActivatedRoute, private ms:MovieService,
@@ -52,25 +53,26 @@ export class TheatreComponent implements OnInit {
   selectDate(date: Date) {
     this.selectedDate = date;
     this.filterTimings();
+    
   }
 
   filterTimings() {
-    if (!this.selectedDate) {
+    if (!this.selectedDate && !this.selectedTheatre) {
       this.filteredTimings = [];
       return;
     }
 
-    // Get the current system date
+    
     const currentSystemDate = new Date();
     const selectedDate = this.selectedDate as Date;
 
     if (currentSystemDate.toDateString() === selectedDate.toDateString()) {
-      // Selected date is today, filter show timings
+      
       const currentSystemTime = new Date();
       const currentHours = currentSystemTime.getHours();
       const currentMinutes = currentSystemTime.getMinutes();
+    
       
-      // Filter show timings to only display those in the future
       this.filteredTimings = this.showTimings.filter(timing => {
         const[showtime,ampm] = timing.split(' ');
         var [showHours, showMinutes] = showtime.split(':').map(Number);
@@ -79,20 +81,37 @@ export class TheatreComponent implements OnInit {
           showHours > currentHours ||
           (showHours === currentHours && showMinutes > currentMinutes)
         ) {
-          return true; // Show this timing
+          return true;  
         }
-        return false; // Don't show this timing
+        return false; 
       });
     } else {
-      // Selected date is not today, display all show timings
+      
       this.filteredTimings = this.showTimings;
     }
   }
   
-  selectShow(show: string) {
-    this.selectedShow = show;
-      }
+      
+  selectShow(theatreId: string, timing: string) {
+        this.selectedShowTimes[theatreId] = timing;
+        this.selectedShow=timing;
+  }
+selectTheatre(theatreId: string){
+  this.selectedTheatre = theatreId;
+  
+}
 
+selectSeats(){
+  this.router.navigate(['/seats'], {
+    queryParams: {
+      movieId: this.movieId,
+      selectedCity: this.selectedCity,
+      selectedTheatre: this.selectedTheatre,
+      selectedDate: this.selectedDate?.toDateString(),
+      selectedShow: this.selectedShow,
+    },
+  });
+}
         ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const movieIdParam = params.get('movieId');
@@ -113,7 +132,7 @@ export class TheatreComponent implements OnInit {
     getTheatreDetails() {
     this.mtservice.getMovieTheatresByMovieAndCity(this.movieId, this.selectedCity).subscribe((theatreDetails: any[]) => {
       this.theatres = theatreDetails;
-                
+      console.log(theatreDetails);
     });
   }
 

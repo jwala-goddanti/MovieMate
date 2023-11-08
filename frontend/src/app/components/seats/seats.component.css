@@ -1,8 +1,8 @@
 .seats-prompt{
   margin-left: 300px;
-  margin-top: 50px;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 20px;
+  font-family:cursive;
+  font-weight:bold;
 }
 .seat-container {
   display: flex;
@@ -49,6 +49,188 @@ width: 70%;
   background-color:rgb(255, 0, 123);
   color: #fff;
 }
+
+button.seat-box:disabled {
+  background-color: #ccc; 
+  color: #1f1e1e; 
+  cursor: not-allowed; 
+  
+}
+
+.pay-button {
+  background-color: #02750c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+#ticket-pdf h3{
+  font-family: cursive;
+  font-size: 18px;
+  color:#fff
+}
+
+
+/* CSS for Ticket Styling */
+#ticket-pdf {
+  font-family: Arial, sans-serif;
+  max-width: 180mm;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #15A3EF;
+  
+}
+
+.ticket {
+  background-color: #fff;
+  border: 1px  15A3EF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.ticket h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.ticket p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.seats {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.seats span {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
