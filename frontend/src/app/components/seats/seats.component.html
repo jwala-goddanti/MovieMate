@@ -69,13 +69,14 @@ Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
                     </div>
                 <div class="modal-footer">
                   <br><small>Amount Paid: {{totalcost}}</small><br>
-                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal" class="pay-button" data-bs-toggle="modal" (click)="getTicket()" >Get Ticket</button>
+                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal" class="pay-button" data-bs-toggle="modal" (click)="getTicket()" routerLink="/dashboard" >Get Ticket</button>
                     
                 </div>
             </div>
         </div>
       </div>      
- 
+ <br><br><br><br><br>
+ <div class="seat-prompt" style="text-align:center; font-size:25px; color:rgb(79, 78, 78)">Proceed Payment to get the ticket ...</div><br>
       <div id="ticket-pdf">
         <h3>MovieMate</h3>
         <div class="ticket">
@@ -95,7 +96,7 @@ Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
           </div>
         </div>
       </div>
-       
+   
       
       
       

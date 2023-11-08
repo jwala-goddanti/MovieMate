@@ -30,6 +30,7 @@ export class SeatComponent implements OnInit {
   movieid:number=0;
   public moviename: string='';
   public movieposter:any;
+  public display:boolean=false;
   constructor(private seatService: SeatService, private route: ActivatedRoute, private theatreService: TheatreService,
     private movieService: MovieService) { 
 

@@ -76,6 +76,7 @@ button.seat-box:disabled {
 
 /* CSS for Ticket Styling */
 #ticket-pdf {
+  
   font-family: Arial, sans-serif;
   max-width: 180mm;
   margin: 0 auto;
