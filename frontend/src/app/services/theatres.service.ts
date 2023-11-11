@@ -16,8 +16,8 @@ export class TheatreService {
     return this.http.get<Theatre[]>(this.apiUrl);
   }
 
-  getTheatre(id: number): Observable<Theatre> {
-    return this.http.get<Theatre>(`${this.apiUrl}/${id}`);
+  getTheatre(id: string) {
+    return this.http.get<any[]>(`${this.apiUrl}${id}`);
   }
 
   addTheatre(theatre: Theatre): Observable<Theatre> {

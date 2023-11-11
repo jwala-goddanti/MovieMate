@@ -16,14 +16,12 @@ export class LoginComponent implements OnInit {
   type: string = 'password';
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
-  username: string =' ';
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService,
-    private userStore: UserStoreService,
-    
+    private userStore: UserStoreService
   ) {}
 
   ngOnInit() {
@@ -43,26 +41,18 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.value);
       this.auth.signIn(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res.message);
+          console.log(res);
           this.loginForm.reset();
           this.auth.storeToken(res.accessToken);
           this.auth.storeRefreshToken(res.refreshToken);
           const tokenPayload = this.auth.decodedToken();
-  
-          
-          // Check if tokenPayload is not null before accessing its properties
-          if (tokenPayload) {
-            this.userStore.setFullNameForStore(tokenPayload.name);
-            this.userStore.setRoleForStore(tokenPayload.role);
-          } else {
-            console.error('Token payload is null');
-          }
-  
-          this.toast.success({detail: "SUCCESS", summary: res.message, duration: 5000});
-          this.router.navigate(['dashboard']);
+          this.userStore.setFullNameForStore(tokenPayload.unique_name);
+          this.userStore.setRoleForStore(tokenPayload.role);
+          this.toast.success({detail:"Enjoy watching the movies with Moviemate", summary:"Login Success", duration: 5000});
+          this.router.navigate(['dashboard'])
         },
         error: (err) => {
-          this.toast.error({detail: "ERROR", summary: "Something went wrong!", duration: 5000});
+          this.toast.error({detail:"ERROR", summary:"Something when wrong!", duration: 5000});
           console.log(err);
         },
       });
@@ -70,7 +60,4 @@ export class LoginComponent implements OnInit {
       ValidateForm.validateAllFormFields(this.loginForm);
     }
   }
-
-  
-  
 }

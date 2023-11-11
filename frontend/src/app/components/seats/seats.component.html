@@ -1,26 +1,139 @@
 
-<div class="seats-prompt">
-Seats Selected <span *ngFor="let seat of selectedSeats"> {{seat}}</span>
-<div *ngIf="seatSelected">
+<div class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"><h1><i>MovieMate</i></h1></a>
+  
+  <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+          <a style="background: rgba(236, 45, 7, 0.989);
+          color: #fbfbff;
+          border-radius: 7px;
+          margin: 10px;" class="nav-link px-3 cursor-pointer"routerLink="/dashboard">cancel Booking</a>
+      </div>
+  </div>
+</div>
+<br><br>
 
-  Selected seat: {{seatSelected}}
-</div></div>
+<div class="seats-prompt">
+  Theatre Name: {{theatrename}} ({{screenName}})<br>
+  Movie Name: {{moviename}}<br>
+  Date: {{selectedDate}}<br>
+  Show Time: {{selectedShow}}<br>
+
+
+Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
+<div *ngIf="noofseatsSelected!=0">
+
+  No of selected seats: {{noofseatsSelected}}
+  <button class="pay-button" data-bs-toggle="modal" data-bs-target="#ticket" > Pay {{totalcost}}</button>
+</div>
+</div>
 <div class="seat-container">
     <table class="seat-table">
     <ng-container *ngFor="let row of seats; let rowIndex = index">
       <tr *ngIf="rowIndex % 9 === 0">
-        <!-- Start a new row after every 9 seats -->
+        
+      </tr>
+      <td *ngIf="rowIndex % 4 === 0 || rowIndex % 9 === 0 ">
+       </td>
+        <tr *ngIf="rowIndex % 18 === 0">
+       <td colspan="3"><b>{{seattype[row.seatType]}}-Rs.{{row.price}}</b></td>
       </tr>
       <td>
-            <button class="seat-box" [class.clicked]="seatSelected==row.seatName || selectedSeats.includes(row.seatName)" (click)="selectSeat(row.seatName)"><div class="seat-box-content">
-              {{ row.seatName }}</div>
-            </button>
-          
-      </td>
+        <button
+          class="seat-box"
+          [class.clicked]="seatSelected === row.seatName || selectedSeats.includes(row.seatName)"
+          [disabled]="bookedseats.includes(row.seatId)"
+          (click)="selectSeat(row.seatName)"
+        >
+          <div class="seat-box-content">
+            {{ row.seatName }}
+          </div>
+        </button>
+      </td>                                                          
     </ng-container>
   </table>
       </div>
+       <div class="modal fade" id="ticket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <p class="modal-title" id="exampleModalLabel">
+                    
+                     <div style="font-size: 30px;font-weight:700">Payment Successful</div><br>
+                     <img src="http://craftizen.org/wp-content/uploads/2019/02/successful_payment_388054.png" height="100" width="100" alt="payment successful" ><br>
+                        
+            
+                    </div>
+                <div class="modal-footer">
+                  <br><small>Amount Paid: {{totalcost}}</small><br>
+                    <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal" class="pay-button" data-bs-toggle="modal" (click)="getTicket()" routerLink="/dashboard" >Get Ticket</button>
+                    
+                </div>
+            </div>
+        </div>
+      </div>      
+ <br><br><br><br><br>
+ <div class="seat-prompt" style="text-align:center; font-size:25px; color:rgb(79, 78, 78)">Proceed Payment to get the ticket ...</div><br>
+      <div id="ticket-pdf">
+        <h3>MovieMate</h3>
+        <div class="ticket">
+          
+          <div class="header">
+            <h1>Theatre: {{theatrename}} </h1>
+          </div>
+        <div class="details">
+          <p>({{screenName}})</p>
+            <p>Movie Name: {{moviename}}</p>
+            <p>Date: {{selectedDate}}</p>
+            <p>Show Time: {{selectedShow}}</p>
+          </div>
+          <div class="seats">
+            <p>Seats Reserved:</p>
+            <span *ngFor="let seat of selectedSeats; let last = last">{{seat}}{{!last ? ', ' : ''}}</span>
+            <p>Amount Paid: Rs.{{totalcost}}/-</p>
+          </div>
+        </div>
+      </div>
+   
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+ 
+ 
+ 
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+            
       
       
       

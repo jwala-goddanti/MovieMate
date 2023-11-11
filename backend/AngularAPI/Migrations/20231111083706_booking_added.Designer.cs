@@ -4,6 +4,7 @@ using AngularAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111083706_booking_added")]
+    partial class booking_added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +33,10 @@ namespace AngularAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.Property<string>("MovieTheatreID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SelectedDate")
@@ -43,14 +48,20 @@ namespace AngularAPI.Migrations
                     b.Property<string>("SelectedShow")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("totalcost")
-                        .HasColumnType("float");
+                    b.Property<int?>("movieTheatreMovieTheaterID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalcost")
+                        .HasColumnType("int");
 
                     b.Property<string>("userName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookingId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("movieTheatreMovieTheaterID");
 
                     b.ToTable("bookings", (string)null);
                 });
@@ -248,6 +259,23 @@ namespace AngularAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("AngularAPI.Models.Booking", b =>
+                {
+                    b.HasOne("AngularAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AngularAPI.Models.MovieTheatre", "movieTheatre")
+                        .WithMany()
+                        .HasForeignKey("movieTheatreMovieTheaterID");
+
+                    b.Navigation("User");
+
+                    b.Navigation("movieTheatre");
                 });
 
             modelBuilder.Entity("AngularAPI.Models.MovieTheatre", b =>

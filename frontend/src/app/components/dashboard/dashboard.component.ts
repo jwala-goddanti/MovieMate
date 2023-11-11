@@ -14,8 +14,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public users: any = [];
-  public role: string | null = null;
   public movie: any = [];
   public cities: any = [];
   public selectedCity: number = 1;
@@ -24,8 +22,12 @@ export class DashboardComponent implements OnInit {
   filteredMovies: any[] = [];
   public theatres: any =[];
   public movieId: number =1;
-  public fullName: string = " ";
   movieFilter: string = '';
+
+  public users:any = [];
+  public role!:string;
+
+  public fullName : string = "";
 
   constructor(
     private api: ApiService,
@@ -39,10 +41,8 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.api.getUsers().subscribe((res: any) => {
-      this.users = res;
-    });
 
+                                         
     this.movies.getMovies().subscribe((data: any[]) => {
       this.movie = data;
     });
@@ -52,19 +52,20 @@ export class DashboardComponent implements OnInit {
       
     });
 
-    this.userStore.getFullNameFromStore().subscribe((val: string | null) => {
-      if (val !== null) {
-        this.fullName = val;
-      } else {
-        const fullNameFromToken = this.auth.getfullNameFromToken();
-        this.fullName = fullNameFromToken || "";
-      }
+   
+    this.userStore.getFullNameFromStore()
+    .subscribe(val=>{
+      const fullNameFromToken = this.auth.getfullNameFromToken();
+      this.fullName = val || fullNameFromToken
     });
+
 
     this.userStore.getRoleFromStore().subscribe((val: string | null) => {
       const roleFromToken = this.auth.getRoleFromToken();
       this.role = val || roleFromToken;
     });
+
+    console.log('Full name: ',this.fullName);
   }
 
   logout() {
@@ -115,8 +116,7 @@ export class DashboardComponent implements OnInit {
        
       this.movieId = mId;
       this.router.navigate(['/theatres',this.movieId, this.selectedCity]);
-  
-  }
+    }
    
 }
          

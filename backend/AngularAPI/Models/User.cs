@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AngularAPI.Models
+﻿namespace AngularAPI.Models
 {
     public class User
     {
-        [Key]
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -13,6 +10,7 @@ namespace AngularAPI.Models
         public string? Token { get; set; }
         public string? Role { get; set; }
         public string? Email { get; set; }
-
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
