@@ -13,7 +13,6 @@
     </div>
   </div>
 </div>
-
 <div class="movie-details-container">
   <div class="movie-card">
     <img [src]="selectedposter" [alt]="movietitle" class="movie-poster">
@@ -55,7 +54,7 @@
             *ngFor="let timing of filteredTimings"
             class="show-button"
             [class.clicked]="selectedShow === timing"
-            (click)="selectShow(t.theatre.theatreID, timing)"
+            (click)="selectShow(t.theatre.theatreID, timing, t.movieTheaterID, t.screenName)"
           >
             {{ timing }}
           </button>

@@ -14,7 +14,7 @@
 <br><br>
 
 <div class="seats-prompt">
-  Theatre Name: {{theatrename}}<br>
+  Theatre Name: {{theatrename}} ({{screenName}})<br>
   Movie Name: {{moviename}}<br>
   Date: {{selectedDate}}<br>
   Show Time: {{selectedShow}}<br>
@@ -82,10 +82,10 @@ Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
         <div class="ticket">
           
           <div class="header">
-            <h1>Theatre: {{theatrename}}</h1>
+            <h1>Theatre: {{theatrename}} </h1>
           </div>
         <div class="details">
-           
+          <p>({{screenName}})</p>
             <p>Movie Name: {{moviename}}</p>
             <p>Date: {{selectedDate}}</p>
             <p>Show Time: {{selectedShow}}</p>
@@ -93,7 +93,7 @@ Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
           <div class="seats">
             <p>Seats Reserved:</p>
             <span *ngFor="let seat of selectedSeats; let last = last">{{seat}}{{!last ? ', ' : ''}}</span>
-            <p>Amount Paid: Rs.{{totalcost}}/-</p>
+            <p>Amount Paid: Rs.{{totalcost}}/- by {{userName}}</p>
           </div>
         </div>
       </div>

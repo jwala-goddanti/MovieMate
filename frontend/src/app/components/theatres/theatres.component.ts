@@ -32,6 +32,8 @@ export class TheatreComponent implements OnInit {
   filteredTimings: string[] = [];
   public selectedTheatre:string='';
   public selectedShowTimes: { [theatreId: string]: string } = {};
+  public screenid: any=0;
+  public screenName: any='';
 
 
   constructor(private mtservice: MovieTheatreService, private route: ActivatedRoute, private ms:MovieService,
@@ -92,9 +94,13 @@ export class TheatreComponent implements OnInit {
   }
   
       
-  selectShow(theatreId: string, timing: string) {
+  selectShow(theatreId: string, timing: string, screenid: string, screenName: string) {
         this.selectedShowTimes[theatreId] = timing;
         this.selectedShow=timing;
+        this.screenid = screenid;
+        this.screenName = screenName;
+        console.log('screenid',screenid);
+        console.log('screen Name: ',screenName);
   }
 selectTheatre(theatreId: string){
   this.selectedTheatre = theatreId;
@@ -109,6 +115,8 @@ selectSeats(){
       selectedTheatre: this.selectedTheatre,
       selectedDate: this.selectedDate?.toDateString(),
       selectedShow: this.selectedShow,
+      screenid: this.screenid,
+      screenName: this.screenName,
     },
   });
 }

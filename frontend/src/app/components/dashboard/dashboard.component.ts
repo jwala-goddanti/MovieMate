@@ -42,11 +42,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.api.getUsers()
-    .subscribe(res=>{
-    this.users = res;
-    });
-                         
+                                         
     this.movies.getMovies().subscribe((data: any[]) => {
       this.movie = data;
     });
@@ -120,8 +116,7 @@ export class DashboardComponent implements OnInit {
        
       this.movieId = mId;
       this.router.navigate(['/theatres',this.movieId, this.selectedCity]);
-  
-  }
+    }
    
 }
          

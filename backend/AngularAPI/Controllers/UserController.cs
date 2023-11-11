@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AngularAPI.Models.Dto;
 
 
-
 namespace AngularAuthYtAPI.Controllers
 {
     [Route("api/[controller]")]

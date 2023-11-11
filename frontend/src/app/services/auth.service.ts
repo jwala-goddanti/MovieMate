@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../models/token-api.model';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,15 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}register`, userObj);
   }
 
-  signIn(loginObj : any){
-    return this.http.post<any>(`${this.baseUrl}authenticate`,loginObj)
+  signIn(loginObj: any) {
+    return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj)
+      .pipe(
+        tap(response => {
+          this.userPayload = this.decodedToken();
+          console.log(this.userPayload);
+          this.storeToken(response.token); // Store the token after a successful login
+        })
+      );
   }
                   
   signOut() {
@@ -54,6 +62,7 @@ export class AuthService {
     const token = this.getToken();
     if (token) {
       console.log(jwtHelper.decodeToken(token));
+
       return jwtHelper.decodeToken(token);
     }
     return null;
@@ -81,7 +90,4 @@ export class AuthService {
     }
     this.userPayload.unique_name = username;
   }
-
-  
-
 }
