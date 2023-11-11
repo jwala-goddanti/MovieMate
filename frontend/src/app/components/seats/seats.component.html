@@ -84,15 +84,16 @@ Seats Selected:<span *ngFor="let seat of selectedSeats"> {{seat}}</span>
           <div class="header">
             <h1>Theatre: {{theatrename}}</h1>
           </div>
-          <div class="details">
+        <div class="details">
+           
             <p>Movie Name: {{moviename}}</p>
             <p>Date: {{selectedDate}}</p>
             <p>Show Time: {{selectedShow}}</p>
           </div>
           <div class="seats">
-            <p>Seats Selected:</p>
+            <p>Seats Reserved:</p>
             <span *ngFor="let seat of selectedSeats; let last = last">{{seat}}{{!last ? ', ' : ''}}</span>
-            <p>Total Cost: {{totalcost}}</p>
+            <p>Amount Paid: Rs.{{totalcost}}/-</p>
           </div>
         </div>
       </div>

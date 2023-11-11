@@ -121,7 +121,7 @@ this.movieService.getMovieDetails(this.movieid).subscribe((movie: any) =>{
   
     if (content) {
       html2canvas(content).then((canvas) => {
-        const imgWidth = 297; // Use A4 page width (297 mm)
+        const imgWidth = 280; // Use A4 page width (297 mm)
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
   
         // Optimize image data by resizing it
@@ -131,10 +131,8 @@ this.movieService.getMovieDetails(this.movieid).subscribe((movie: any) =>{
   
         const xCoordinate = 10; // Specify the X-coordinate
         const yCoordinate = 10; // Specify the Y-coordinate
-  
         pdf.addImage(contentDataURL, 'JPEG', xCoordinate, yCoordinate, imgWidth, imgHeight);
   
-        // Save the PDF as a download link
         pdf.save('MovieMateTicket.pdf');
       }).catch((error) => {
         console.error('Error generating PDF:', error);

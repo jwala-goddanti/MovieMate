@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { TokenApiModel } from '../models/token-api.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private baseUrl: string = 'https://localhost:44348/api/User/';
   private userPayload: any;
+  private jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) {
     this.userPayload = this.decodedToken();
@@ -19,12 +20,10 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}register`, userObj);
   }
 
-  signIn(loginObj: any) {
-    
-    return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj);
-
+  signIn(loginObj : any){
+    return this.http.post<any>(`${this.baseUrl}authenticate`,loginObj)
   }
-
+                  
   signOut() {
     localStorage.clear();
     this.router.navigate(['login']);
@@ -51,28 +50,22 @@ export class AuthService {
   }
 
   decodedToken() {
+    const jwtHelper = new JwtHelperService();
     const token = this.getToken();
     if (token) {
-      const tokenParts = token.split('.');
-      if (tokenParts.length === 3) {
-        const decodedPayload = atob(tokenParts[1]);
-        return JSON.parse(decodedPayload);
-      }
+      console.log(jwtHelper.decodeToken(token));
+      return jwtHelper.decodeToken(token);
     }
     return null;
   }
 
   getfullNameFromToken() {
     if (this.userPayload) {
-      return this.userPayload.name; // Assuming 'name' is the field in your JWT payload
+      return this.userPayload.unique_name;
     }
-    this.setUsername(this.userPayload.name); 
-    return this.getUsername();
   }
 
- 
- 
-   getRoleFromToken() {
+  getRoleFromToken() {
     if (this.userPayload) {
       return this.userPayload.role;
     }
@@ -83,13 +76,12 @@ export class AuthService {
   }
 
   setUsername(username: string) {
-    this.userPayload = { name: username };
+    if (!this.userPayload) {
+      this.userPayload = {};
+    }
+    this.userPayload.unique_name = username;
   }
 
-  getUsername() {
-    if (this.userPayload) {
-      return this.userPayload.name;
-    }
-    return null;
-  }
+  
+
 }

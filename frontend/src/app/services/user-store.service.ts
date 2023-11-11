@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStoreService {
-  private readonly fullName$ = new BehaviorSubject<string>("");
-  private readonly role$ = new BehaviorSubject<string>("");
+private fullName$ = new BehaviorSubject<string>("");
+private role$ = new BehaviorSubject<string>("");
 
-  constructor() { }
+constructor() { }
 
-  public getRoleFromStore(): Observable<string> {
+  public getRoleFromStore(){
     return this.role$.asObservable();
   }
 
-  public setRoleForStore(role: string): void {
+  public setRoleForStore(role:string){
     this.role$.next(role);
   }
 
-  public getFullNameFromStore(): Observable<string> {
+  public getFullNameFromStore(){
     return this.fullName$.asObservable();
   }
 
-  public setFullNameForStore(fullname: string): void {
-    this.fullName$.next(fullname);
+  public setFullNameForStore(fullname:string){
+    this.fullName$.next(fullname)
   }
+
 }
